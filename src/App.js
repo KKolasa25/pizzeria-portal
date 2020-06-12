@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import Homepage from './components/views/Homepage/Homepage';
@@ -14,10 +14,10 @@ import OrderSingle from './components/views/OrderSingle/OrderSingle';
 
 function App() {
   return (
-    <BrowserRouter basename={'/panel'}>
+    <BrowserRouter> {/*usuniecie basename={'/panel'} aby nie powtarzać w linku localhost/panel/panel/XYZ - nie do końca rozumiem po co basename się tutaj znajduje (pewnie jest ważne skoro było w kodzie zadania), ale przecież /panel pobieramy z "process.env.PUBLIC_URL"*/}
       <MainLayout>
         <Switch>
-          <Route exact path={`${process.env.PUBLIC_URL}/`} component={Homepage} />
+          <Route exact path={process.env.PUBLIC_URL + '/home'} component={Homepage} />
           <Route exact path={process.env.PUBLIC_URL + '/login'} component={Login} />
           <Route exact path={process.env.PUBLIC_URL + '/tables'} component={Tables} />
           <Route exact path={process.env.PUBLIC_URL + '/tables/booking/:id'} component={TablesBooking} />
@@ -26,10 +26,12 @@ function App() {
           <Route exact path={process.env.PUBLIC_URL + '/waiter/new'} component={OrderNew} />
           <Route exact path={process.env.PUBLIC_URL + '/waiter/order/:id'} component={OrderSingle} />
           <Route exact path={process.env.PUBLIC_URL + '/kitchen'} component={Kitchen} />
+          <Redirect from={process.env.PUBLIC_URL} to={process.env.PUBLIC_URL + '/home'} /> {/* przekierowanie z localhost/panel na localhost/panel/home */}
         </Switch>
       </MainLayout>
     </BrowserRouter>
   );
 }
+//console.log(process.env.PUBLIC_URL);
 
 export default App;
