@@ -14,7 +14,7 @@ import OrderSingle from './components/views/OrderSingle/OrderSingle';
 
 function App() {
   return (
-    <BrowserRouter> {/*usuniecie basename={'/panel'} aby nie powtarzać w linku localhost/panel/panel/XYZ - nie do końca rozumiem po co basename się tutaj znajduje (pewnie jest ważne skoro było w kodzie zadania), ale przecież /panel pobieramy z "process.env.PUBLIC_URL"*/}
+    <BrowserRouter> 
       <MainLayout>
         <Switch>
           <Route exact path={process.env.PUBLIC_URL + '/home'} component={Homepage} />
@@ -26,12 +26,11 @@ function App() {
           <Route exact path={process.env.PUBLIC_URL + '/waiter/new'} component={OrderNew} />
           <Route exact path={process.env.PUBLIC_URL + '/waiter/order/:id'} component={OrderSingle} />
           <Route exact path={process.env.PUBLIC_URL + '/kitchen'} component={Kitchen} />
-          <Redirect from={process.env.PUBLIC_URL} to={process.env.PUBLIC_URL + '/home'} /> {/* przekierowanie z localhost/panel na localhost/panel/home */}
+          <Redirect from={process.env.PUBLIC_URL} to={process.env.PUBLIC_URL + '/home'} /> 
         </Switch>
       </MainLayout>
     </BrowserRouter>
   );
 }
-//console.log(process.env.PUBLIC_URL);
 
 export default App;
