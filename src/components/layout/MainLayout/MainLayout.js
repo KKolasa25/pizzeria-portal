@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './MainLayout.scss';
 import PageNav from '../PageNav/PageNav';
 
-
 const MainLayout = ({children}) => {
 
   return (
